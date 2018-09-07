@@ -31,13 +31,12 @@ namespace CGPaint
         bool criandoPoligono = false;
         Ponto verticeInicial;
         Poligono tmpPoligono;
-        string tipoReta = "";
 
         public frmPrincipal()
         {
             InitializeComponent();
-            int x = 450;// pnlTela.Width / tamanhoPonto;
-            int y = 220;// pnlTela.Height / tamanhoPonto;
+            int x = 660;// pnlTela.Width / tamanhoPonto;
+            int y = 350;// pnlTela.Height / tamanhoPonto;
             criarTela(x, y);
             desenharTela();
         }
@@ -80,6 +79,7 @@ namespace CGPaint
                             g.DrawRectangle(Pens.Black, i * tamanhoPonto, j * tamanhoPonto, tamanhoPonto, tamanhoPonto);
                         if (recorteAtivado)
                             g.DrawRectangle(Pens.Red, xMin * tamanhoPonto, yMin * tamanhoPonto, (xMax - xMin + 1) * tamanhoPonto, (yMax - yMin + 1) * tamanhoPonto);
+
                     }
             }
             pbMonitor.Refresh();
@@ -735,6 +735,8 @@ namespace CGPaint
             return (o.GetType() == typeof(Poligono3D));
         }
 
+        #region Tranformações 
+
         private void btnTransformarTranslacao_Click(object sender, EventArgs e)
         {
             int sel = selecionarForma();
@@ -1080,6 +1082,349 @@ namespace CGPaint
             }
         }
 
+        private void btnReflexaoEixoX_Click(object sender, EventArgs e)
+        {
+            int sel = selecionarForma();
+            if (sel == -1)
+                return;
+
+
+            frmEntradaReflexao frmEntradaReflexao = new frmEntradaReflexao();
+            frmEntradaReflexao.ShowDialog(this);
+            if (frmEntradaReflexao.DialogResult == DialogResult.OK)
+            {
+
+                int[,] matrizReflexaoX = { { 1, 0, 0 },
+                                                    { 0, -1, 0 },
+                                                     { 0, 0, 1 } };
+
+
+                Type t = formas[sel].GetType();
+                if (t == typeof(Ponto))
+                {
+                    int[,] resultado = Matriz.Reflexao(matrizReflexaoX, ((Ponto)formas[sel]).getCoordenadaHomogenea());
+                    ((Ponto)formas[sel]).setCoordenadaHomogenea(resultado);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Reta))
+                {
+                    int[,] resultadoInicio = Matriz.Reflexao(matrizReflexaoX, ((Reta)formas[sel]).getPontoInicial().getCoordenadaHomogenea());
+                    ((Reta)formas[sel]).getPontoInicial().setCoordenadaHomogenea(resultadoInicio);
+                    int[,] resultadoFim = Matriz.Reflexao(matrizReflexaoX, ((Reta)formas[sel]).getPontoFinal().getCoordenadaHomogenea());
+                    ((Reta)formas[sel]).getPontoFinal().setCoordenadaHomogenea(resultadoFim);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Circulo))
+                {
+                    Ponto centro = ((Circulo)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.Reflexao(matrizReflexaoX, centro.getCoordenadaHomogenea());
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Circulo)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Elipse))
+                {
+                    Ponto centro = ((Elipse)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.Reflexao(matrizReflexaoX, centro.getCoordenadaHomogenea());
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Elipse)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Poligono))
+                {
+                    List<Ponto> vertices = ((Poligono)formas[sel]).getVertices();
+                    foreach (Ponto v in vertices)
+                    {
+                        int[,] resultado = Matriz.Reflexao(matrizReflexaoX, v.getCoordenadaHomogenea());
+                        v.setCoordenadaHomogenea(resultado);
+                    }
+                    ((Poligono)formas[sel]).setVertices(vertices);
+                    aplicarRecorte();
+                    return;
+                }
+            }
+
+            desenharTela();
+
+        }
+
+        private void btnReflexaoEixoY_Click(object sender, EventArgs e)
+        {
+            int sel = selecionarForma();
+            if (sel == -1)
+                return;
+
+
+            frmEntradaReflexao frmEntradaReflexao = new frmEntradaReflexao();
+            frmEntradaReflexao.ShowDialog(this);
+            if (frmEntradaReflexao.DialogResult == DialogResult.OK)
+            {
+                int[,] MatrizReflexaoY = { { -1, 0, 0 },
+                                                    { 0, 1, 0 },
+                                                     { 0, 0, 1 } };
+
+                Type t = formas[sel].GetType();
+                if (t == typeof(Ponto))
+                {
+                    int[,] resultado = Matriz.Reflexao(MatrizReflexaoY, ((Ponto)formas[sel]).getCoordenadaHomogenea());
+                    ((Ponto)formas[sel]).setCoordenadaHomogenea(resultado);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Reta))
+                {
+                    int[,] resultadoInicio = Matriz.Reflexao(MatrizReflexaoY, ((Reta)formas[sel]).getPontoInicial().getCoordenadaHomogenea());
+                    ((Reta)formas[sel]).getPontoInicial().setCoordenadaHomogenea(resultadoInicio);
+                    int[,] resultadoFim = Matriz.Reflexao(MatrizReflexaoY, ((Reta)formas[sel]).getPontoFinal().getCoordenadaHomogenea());
+                    ((Reta)formas[sel]).getPontoFinal().setCoordenadaHomogenea(resultadoFim);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Circulo))
+                {
+                    Ponto centro = ((Circulo)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.Reflexao(MatrizReflexaoY, centro.getCoordenadaHomogenea());
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Circulo)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Elipse))
+                {
+                    Ponto centro = ((Elipse)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.Reflexao(MatrizReflexaoY, centro.getCoordenadaHomogenea());
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Elipse)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Poligono))
+                {
+                    List<Ponto> vertices = ((Poligono)formas[sel]).getVertices();
+                    foreach (Ponto v in vertices)
+                    {
+                        int[,] resultado = Matriz.Reflexao(MatrizReflexaoY, v.getCoordenadaHomogenea());
+                        v.setCoordenadaHomogenea(resultado);
+                    }
+                    ((Poligono)formas[sel]).setVertices(vertices);
+                    aplicarRecorte();
+                    return;
+                }
+            }
+
+            desenharTela();
+
+        }
+
+        private void btnReflexaoOrigem_Click(object sender, EventArgs e)
+        {
+            int sel = selecionarForma();
+            if (sel == -1)
+                return;
+
+
+            frmEntradaReflexao frmEntradaReflexao = new frmEntradaReflexao();
+            frmEntradaReflexao.ShowDialog(this);
+            if (frmEntradaReflexao.DialogResult == DialogResult.OK)
+            {
+                int[,] MatrizReflexaoOrigem = { { -1, 0, 0 },
+                                                    { 0, -1, 0 },
+                                                     { 0, 0, 1 } };
+
+                Type t = formas[sel].GetType();
+                if (t == typeof(Ponto))
+                {
+                    int[,] resultado = Matriz.Reflexao(MatrizReflexaoOrigem, ((Ponto)formas[sel]).getCoordenadaHomogenea());
+                    ((Ponto)formas[sel]).setCoordenadaHomogenea(resultado);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Reta))
+                {
+                    int[,] resultadoInicio = Matriz.Reflexao(MatrizReflexaoOrigem, ((Reta)formas[sel]).getPontoInicial().getCoordenadaHomogenea());
+                    ((Reta)formas[sel]).getPontoInicial().setCoordenadaHomogenea(resultadoInicio);
+                    int[,] resultadoFim = Matriz.Reflexao(MatrizReflexaoOrigem, ((Reta)formas[sel]).getPontoFinal().getCoordenadaHomogenea());
+                    ((Reta)formas[sel]).getPontoFinal().setCoordenadaHomogenea(resultadoFim);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Circulo))
+                {
+                    Ponto centro = ((Circulo)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.Reflexao(MatrizReflexaoOrigem, centro.getCoordenadaHomogenea());
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Circulo)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Elipse))
+                {
+                    Ponto centro = ((Elipse)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.Reflexao(MatrizReflexaoOrigem, centro.getCoordenadaHomogenea());
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Elipse)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Poligono))
+                {
+                    List<Ponto> vertices = ((Poligono)formas[sel]).getVertices();
+                    foreach (Ponto v in vertices)
+                    {
+                        int[,] resultado = Matriz.Reflexao(MatrizReflexaoOrigem, v.getCoordenadaHomogenea());
+                        v.setCoordenadaHomogenea(resultado);
+                    }
+                    ((Poligono)formas[sel]).setVertices(vertices);
+                    aplicarRecorte();
+                    return;
+                }
+            }
+
+            desenharTela();
+        }
+
+        private void btnCisalhamentoHorizontal_Click(object sender, EventArgs e)
+        {
+            int sel = selecionarForma();
+            if (sel == -1)
+                return;
+
+            frmEntradaCisalhamento frmEntradaCisalhamento = new frmEntradaCisalhamento();
+            frmEntradaCisalhamento.ShowDialog(this);
+            if (frmEntradaCisalhamento.DialogResult == DialogResult.OK)
+            {
+                int forca = frmEntradaCisalhamento.Forca;
+
+                int[,] MatrizCisalhamentoHorizontal = { { 1, 9999, 0 },
+                                                            { 0, 1, 0 },
+                                                                { 0, 0, 1 } };
+
+                Type t = formas[sel].GetType();
+                if (t == typeof(Ponto))
+                {
+                    int[,] resultado = Matriz.CisalhamentoHorizontal(MatrizCisalhamentoHorizontal, ((Ponto)formas[sel]).getCoordenadaHomogenea(), forca);
+                    ((Ponto)formas[sel]).setCoordenadaHomogenea(resultado);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Reta))
+                {
+                    int[,] resultadoInicio = Matriz.CisalhamentoHorizontal(MatrizCisalhamentoHorizontal, ((Reta)formas[sel]).getPontoInicial().getCoordenadaHomogenea(), forca);
+                    ((Reta)formas[sel]).getPontoInicial().setCoordenadaHomogenea(resultadoInicio);
+                    int[,] resultadoFim = Matriz.CisalhamentoHorizontal(MatrizCisalhamentoHorizontal, ((Reta)formas[sel]).getPontoFinal().getCoordenadaHomogenea(), forca);
+                    ((Reta)formas[sel]).getPontoFinal().setCoordenadaHomogenea(resultadoFim);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Circulo))
+                {
+                    Ponto centro = ((Circulo)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.CisalhamentoHorizontal(MatrizCisalhamentoHorizontal, centro.getCoordenadaHomogenea(), forca);
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Circulo)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Elipse))
+                {
+                    Ponto centro = ((Elipse)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.CisalhamentoHorizontal(MatrizCisalhamentoHorizontal, centro.getCoordenadaHomogenea(), forca);
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Elipse)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Poligono))
+                {
+                    List<Ponto> vertices = ((Poligono)formas[sel]).getVertices();
+                    foreach (Ponto v in vertices)
+                    {
+                        int[,] resultado = Matriz.CisalhamentoHorizontal(MatrizCisalhamentoHorizontal, v.getCoordenadaHomogenea(), forca);
+                        v.setCoordenadaHomogenea(resultado);
+                    }
+                    ((Poligono)formas[sel]).setVertices(vertices);
+                    aplicarRecorte();
+                    return;
+                }
+            }
+
+            desenharTela();
+        }
+
+        private void btnCisalhamentoVertical_Click(object sender, EventArgs e)
+        {
+            int sel = selecionarForma();
+            if (sel == -1)
+                return;
+
+            frmEntradaCisalhamento frmEntradaCisalhamento = new frmEntradaCisalhamento();
+            frmEntradaCisalhamento.ShowDialog(this);
+            if (frmEntradaCisalhamento.DialogResult == DialogResult.OK)
+            {
+                int forca = frmEntradaCisalhamento.Forca;
+
+                int[,] MatrizCisalhamentoVertical = { { 1, 0, 0 },
+                                                            { 9999, 1, 0 },
+                                                                { 0, 0, 1 } };
+
+                Type t = formas[sel].GetType();
+                if (t == typeof(Ponto))
+                {
+                    int[,] resultado = Matriz.CisalhamentoVertical(MatrizCisalhamentoVertical, ((Ponto)formas[sel]).getCoordenadaHomogenea(), forca);
+                    ((Ponto)formas[sel]).setCoordenadaHomogenea(resultado);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Reta))
+                {
+                    int[,] resultadoInicio = Matriz.CisalhamentoVertical(MatrizCisalhamentoVertical, ((Reta)formas[sel]).getPontoInicial().getCoordenadaHomogenea(), forca);
+                    ((Reta)formas[sel]).getPontoInicial().setCoordenadaHomogenea(resultadoInicio);
+                    int[,] resultadoFim = Matriz.CisalhamentoVertical(MatrizCisalhamentoVertical, ((Reta)formas[sel]).getPontoFinal().getCoordenadaHomogenea(), forca);
+                    ((Reta)formas[sel]).getPontoFinal().setCoordenadaHomogenea(resultadoFim);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Circulo))
+                {
+                    Ponto centro = ((Circulo)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.CisalhamentoVertical(MatrizCisalhamentoVertical, centro.getCoordenadaHomogenea(), forca);
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Circulo)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Elipse))
+                {
+                    Ponto centro = ((Elipse)formas[sel]).getCentro();
+                    int[,] resultado = Matriz.CisalhamentoVertical(MatrizCisalhamentoVertical, centro.getCoordenadaHomogenea(), forca);
+                    centro.setCoordenadaHomogenea(resultado);
+                    ((Elipse)formas[sel]).setCentro(centro);
+                    aplicarRecorte();
+                    return;
+                }
+                if (t == typeof(Poligono))
+                {
+                    List<Ponto> vertices = ((Poligono)formas[sel]).getVertices();
+                    foreach (Ponto v in vertices)
+                    {
+                        int[,] resultado = Matriz.CisalhamentoVertical(MatrizCisalhamentoVertical, v.getCoordenadaHomogenea(), forca);
+                        v.setCoordenadaHomogenea(resultado);
+                    }
+                    ((Poligono)formas[sel]).setVertices(vertices);
+                    aplicarRecorte();
+                    return;
+                }
+            }
+
+            desenharTela();
+        }
+
+        #endregion
+
         private void btnObjetos3DInserir_Click(object sender, EventArgs e)
         {
             frmInserirObjeto3D frmInserirObjeto3D = new frmInserirObjeto3D();
@@ -1128,5 +1473,10 @@ namespace CGPaint
             }
         }
 
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            criarTela(660, 350);
+            desenharTela();
+        }
     }
 }

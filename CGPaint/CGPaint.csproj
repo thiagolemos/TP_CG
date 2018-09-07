@@ -75,11 +75,23 @@
     </Compile>
     <Compile Include="Formas.cs" />
     <Compile Include="FrameBuffer.cs" />
+    <Compile Include="frmEntradaCisalhamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntradaCisalhamento.Designer.cs">
+      <DependentUpon>frmEntradaCisalhamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEntradaEscala.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEntradaEscala.Designer.cs">
       <DependentUpon>frmEntradaEscala.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntradaReflexao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntradaReflexao.Designer.cs">
+      <DependentUpon>frmEntradaReflexao.cs</DependentUpon>
     </Compile>
     <Compile Include="frmEntradaRotacao.cs">
       <SubType>Form</SubType>
@@ -126,8 +138,14 @@
     <EmbeddedResource Include="frmCriarNovo.resx">
       <DependentUpon>frmCriarNovo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEntradaCisalhamento.resx">
+      <DependentUpon>frmEntradaCisalhamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEntradaEscala.resx">
       <DependentUpon>frmEntradaEscala.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntradaReflexao.resx">
+      <DependentUpon>frmEntradaReflexao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntradaRotacao.resx">
       <DependentUpon>frmEntradaRotacao.cs</DependentUpon>
@@ -152,6 +170,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -170,6 +189,7 @@
     <Content Include="Icone.ico" />
     <Content Include="Malha.ico" />
     <Content Include="Novo.ico" />
+    <None Include="Resources\if_broom_stick_3_896656.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

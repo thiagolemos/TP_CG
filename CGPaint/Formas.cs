@@ -227,7 +227,7 @@ namespace CGPaint
             int pasos = 0;
 
             float x, y;
-            double deltax, deltay, e, m;
+            double deltax, deltay;
 
             deltax = x1 - x0;
             deltay = y1 - y0;

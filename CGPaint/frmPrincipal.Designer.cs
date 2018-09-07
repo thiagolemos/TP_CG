@@ -37,6 +37,7 @@
             this.btnDesenhar = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnDesenharPonto = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDesenharLinha = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDesenharLinhaDda = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDesenharCirculo = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDesenharElipse = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDesenharPoligono = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,9 @@
             this.btnTransformarTranslacao = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTransformarRotacao = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTransformarEscala = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnReflexaoEixoX = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnReflexaoEixoY = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnReflexaoOrigem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnObjetos3D = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnObjetos3DInserir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,7 +63,10 @@
             this.btnObjetos3DProjecaoObliqua = new System.Windows.Forms.ToolStripMenuItem();
             this.pbMonitor = new System.Windows.Forms.PictureBox();
             this.pnlTela = new System.Windows.Forms.Panel();
-            this.btnDesenharLinhaDda = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCisalhamentoHorizontal = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCisalhamentoVertical = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnLimpar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMonitor)).BeginInit();
             this.pnlTela.SuspendLayout();
@@ -67,8 +74,11 @@
             // 
             // tsMenu
             // 
+            this.tsMenu.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNovo,
+            this.toolStripSeparator4,
+            this.btnLimpar,
             this.toolStripSeparator3,
             this.btnMostraMalha,
             this.toolStripSeparator1,
@@ -137,35 +147,42 @@
             // 
             this.btnDesenharPonto.CheckOnClick = true;
             this.btnDesenharPonto.Name = "btnDesenharPonto";
-            this.btnDesenharPonto.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharPonto.Size = new System.Drawing.Size(159, 22);
             this.btnDesenharPonto.Text = "Ponto";
             // 
             // btnDesenharLinha
             // 
             this.btnDesenharLinha.CheckOnClick = true;
             this.btnDesenharLinha.Name = "btnDesenharLinha";
-            this.btnDesenharLinha.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharLinha.Size = new System.Drawing.Size(159, 22);
             this.btnDesenharLinha.Text = "Reta Bresenham";
+            // 
+            // btnDesenharLinhaDda
+            // 
+            this.btnDesenharLinhaDda.CheckOnClick = true;
+            this.btnDesenharLinhaDda.Name = "btnDesenharLinhaDda";
+            this.btnDesenharLinhaDda.Size = new System.Drawing.Size(159, 22);
+            this.btnDesenharLinhaDda.Text = "Reta DDA";
             // 
             // btnDesenharCirculo
             // 
             this.btnDesenharCirculo.CheckOnClick = true;
             this.btnDesenharCirculo.Name = "btnDesenharCirculo";
-            this.btnDesenharCirculo.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharCirculo.Size = new System.Drawing.Size(159, 22);
             this.btnDesenharCirculo.Text = "Círculo";
             // 
             // btnDesenharElipse
             // 
             this.btnDesenharElipse.CheckOnClick = true;
             this.btnDesenharElipse.Name = "btnDesenharElipse";
-            this.btnDesenharElipse.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharElipse.Size = new System.Drawing.Size(159, 22);
             this.btnDesenharElipse.Text = "Elipse";
             // 
             // btnDesenharPoligono
             // 
             this.btnDesenharPoligono.CheckOnClick = true;
             this.btnDesenharPoligono.Name = "btnDesenharPoligono";
-            this.btnDesenharPoligono.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharPoligono.Size = new System.Drawing.Size(159, 22);
             this.btnDesenharPoligono.Text = "Polígono";
             // 
             // lblPosicaoAtual
@@ -186,20 +203,21 @@
             this.btnPreencher.Name = "btnPreencher";
             this.btnPreencher.Size = new System.Drawing.Size(110, 22);
             this.btnPreencher.Text = "Preenchimento...";
+            this.btnPreencher.Visible = false;
             this.btnPreencher.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnPreencher_DropDownItemClicked);
             // 
             // btnPreencherRecursivo
             // 
             this.btnPreencherRecursivo.CheckOnClick = true;
             this.btnPreencherRecursivo.Name = "btnPreencherRecursivo";
-            this.btnPreencherRecursivo.Size = new System.Drawing.Size(125, 22);
+            this.btnPreencherRecursivo.Size = new System.Drawing.Size(180, 22);
             this.btnPreencherRecursivo.Text = "Recursivo";
             // 
             // btnPreencherVarredura
             // 
             this.btnPreencherVarredura.CheckOnClick = true;
             this.btnPreencherVarredura.Name = "btnPreencherVarredura";
-            this.btnPreencherVarredura.Size = new System.Drawing.Size(125, 22);
+            this.btnPreencherVarredura.Size = new System.Drawing.Size(180, 22);
             this.btnPreencherVarredura.Text = "Varredura";
             // 
             // btnRecortar
@@ -213,19 +231,20 @@
             this.btnRecortar.Name = "btnRecortar";
             this.btnRecortar.Size = new System.Drawing.Size(69, 22);
             this.btnRecortar.Text = "Recorte...";
+            this.btnRecortar.Visible = false;
             // 
             // btnRecortarAplicar
             // 
             this.btnRecortarAplicar.CheckOnClick = true;
             this.btnRecortarAplicar.Name = "btnRecortarAplicar";
-            this.btnRecortarAplicar.Size = new System.Drawing.Size(151, 22);
+            this.btnRecortarAplicar.Size = new System.Drawing.Size(180, 22);
             this.btnRecortarAplicar.Text = "Aplicar recorte";
             this.btnRecortarAplicar.Click += new System.EventHandler(this.btnRecortarAplicar_Click);
             // 
             // btnRecortarDefinirJanela
             // 
             this.btnRecortarDefinirJanela.Name = "btnRecortarDefinirJanela";
-            this.btnRecortarDefinirJanela.Size = new System.Drawing.Size(151, 22);
+            this.btnRecortarDefinirJanela.Size = new System.Drawing.Size(180, 22);
             this.btnRecortarDefinirJanela.Text = "Definir janela";
             this.btnRecortarDefinirJanela.Click += new System.EventHandler(this.btnRecortarDefinirJanela_Click);
             // 
@@ -235,7 +254,12 @@
             this.btnTransformar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnTransformarTranslacao,
             this.btnTransformarRotacao,
-            this.btnTransformarEscala});
+            this.btnTransformarEscala,
+            this.btnReflexaoEixoX,
+            this.btnReflexaoEixoY,
+            this.btnReflexaoOrigem,
+            this.btnCisalhamentoHorizontal,
+            this.btnCisalhamentoVertical});
             this.btnTransformar.Image = ((System.Drawing.Image)(resources.GetObject("btnTransformar.Image")));
             this.btnTransformar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTransformar.Name = "btnTransformar";
@@ -245,23 +269,44 @@
             // btnTransformarTranslacao
             // 
             this.btnTransformarTranslacao.Name = "btnTransformarTranslacao";
-            this.btnTransformarTranslacao.Size = new System.Drawing.Size(130, 22);
+            this.btnTransformarTranslacao.Size = new System.Drawing.Size(205, 22);
             this.btnTransformarTranslacao.Text = "Translação";
             this.btnTransformarTranslacao.Click += new System.EventHandler(this.btnTransformarTranslacao_Click);
             // 
             // btnTransformarRotacao
             // 
             this.btnTransformarRotacao.Name = "btnTransformarRotacao";
-            this.btnTransformarRotacao.Size = new System.Drawing.Size(130, 22);
+            this.btnTransformarRotacao.Size = new System.Drawing.Size(205, 22);
             this.btnTransformarRotacao.Text = "Rotação";
             this.btnTransformarRotacao.Click += new System.EventHandler(this.btnTransformarRotacao_Click);
             // 
             // btnTransformarEscala
             // 
             this.btnTransformarEscala.Name = "btnTransformarEscala";
-            this.btnTransformarEscala.Size = new System.Drawing.Size(130, 22);
+            this.btnTransformarEscala.Size = new System.Drawing.Size(205, 22);
             this.btnTransformarEscala.Text = "Escala";
             this.btnTransformarEscala.Click += new System.EventHandler(this.btnTransformarEscala_Click);
+            // 
+            // btnReflexaoEixoX
+            // 
+            this.btnReflexaoEixoX.Name = "btnReflexaoEixoX";
+            this.btnReflexaoEixoX.Size = new System.Drawing.Size(205, 22);
+            this.btnReflexaoEixoX.Text = "Reflexão(Eixo X)";
+            this.btnReflexaoEixoX.Click += new System.EventHandler(this.btnReflexaoEixoX_Click);
+            // 
+            // btnReflexaoEixoY
+            // 
+            this.btnReflexaoEixoY.Name = "btnReflexaoEixoY";
+            this.btnReflexaoEixoY.Size = new System.Drawing.Size(205, 22);
+            this.btnReflexaoEixoY.Text = "Reflexão(Eixo Y)";
+            this.btnReflexaoEixoY.Click += new System.EventHandler(this.btnReflexaoEixoY_Click);
+            // 
+            // btnReflexaoOrigem
+            // 
+            this.btnReflexaoOrigem.Name = "btnReflexaoOrigem";
+            this.btnReflexaoOrigem.Size = new System.Drawing.Size(205, 22);
+            this.btnReflexaoOrigem.Text = "Reflexão(Origem)";
+            this.btnReflexaoOrigem.Click += new System.EventHandler(this.btnReflexaoOrigem_Click);
             // 
             // btnObjetos3D
             // 
@@ -277,6 +322,7 @@
             this.btnObjetos3D.Name = "btnObjetos3D";
             this.btnObjetos3D.Size = new System.Drawing.Size(78, 22);
             this.btnObjetos3D.Text = "Objetos 3D";
+            this.btnObjetos3D.Visible = false;
             this.btnObjetos3D.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnObjetos3D_DropDownItemClicked);
             // 
             // btnObjetos3DInserir
@@ -330,6 +376,7 @@
             // pnlTela
             // 
             this.pnlTela.AutoScroll = true;
+            this.pnlTela.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlTela.Controls.Add(this.pbMonitor);
             this.pnlTela.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTela.Location = new System.Drawing.Point(0, 25);
@@ -337,12 +384,35 @@
             this.pnlTela.Size = new System.Drawing.Size(696, 448);
             this.pnlTela.TabIndex = 2;
             // 
-            // btnDesenharLinhaDda
+            // btnCisalhamentoHorizontal
             // 
-            this.btnDesenharLinhaDda.CheckOnClick = true;
-            this.btnDesenharLinhaDda.Name = "btnDesenharLinhaDda";
-            this.btnDesenharLinhaDda.Size = new System.Drawing.Size(180, 22);
-            this.btnDesenharLinhaDda.Text = "Reta DDA";
+            this.btnCisalhamentoHorizontal.Name = "btnCisalhamentoHorizontal";
+            this.btnCisalhamentoHorizontal.Size = new System.Drawing.Size(205, 22);
+            this.btnCisalhamentoHorizontal.Text = "Cisalhamento Horizontal";
+            this.btnCisalhamentoHorizontal.Click += new System.EventHandler(this.btnCisalhamentoHorizontal_Click);
+            // 
+            // btnCisalhamentoVertical
+            // 
+            this.btnCisalhamentoVertical.Name = "btnCisalhamentoVertical";
+            this.btnCisalhamentoVertical.Size = new System.Drawing.Size(205, 22);
+            this.btnCisalhamentoVertical.Text = "Cisalhamento Vertical";
+            this.btnCisalhamentoVertical.Click += new System.EventHandler(this.btnCisalhamentoVertical_Click);
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLimpar.Image = global::CGPaint.Properties.Resources.if_broom_stick_3_896656;
+            this.btnLimpar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.btnLimpar.Size = new System.Drawing.Size(23, 22);
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // frmPrincipal
             // 
@@ -354,7 +424,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CGPaint";
+            this.Text = "TP CG";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMonitor)).EndInit();
@@ -398,6 +469,13 @@
         private System.Windows.Forms.ToolStripMenuItem btnObjetos3DProjecaoAxiometrica;
         private System.Windows.Forms.ToolStripMenuItem btnObjetos3DProjecaoObliqua;
         private System.Windows.Forms.ToolStripMenuItem btnDesenharLinhaDda;
+        private System.Windows.Forms.ToolStripMenuItem btnReflexaoEixoX;
+        private System.Windows.Forms.ToolStripMenuItem btnReflexaoEixoY;
+        private System.Windows.Forms.ToolStripMenuItem btnReflexaoOrigem;
+        private System.Windows.Forms.ToolStripMenuItem btnCisalhamentoHorizontal;
+        private System.Windows.Forms.ToolStripMenuItem btnCisalhamentoVertical;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnLimpar;
     }
 }
 

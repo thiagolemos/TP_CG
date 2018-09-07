@@ -18,9 +18,9 @@ namespace CGPaint
                     int soma = 0;
                     for (int k = 0; k < p; k++)
                     {
-                        soma += a[i,k] * b[k,j];
+                        soma += a[i, k] * b[k, j];
                     }
-                    resultado[i,j] = soma;
+                    resultado[i, j] = soma;
                 }
             }
             return resultado;
@@ -89,6 +89,64 @@ namespace CGPaint
                     resultado[i, j] = Convert.ToInt32(soma);
                 }
             }
+            return resultado;
+        }
+
+        public static int[,] Reflexao(int[,] a, int[,] b)
+        {
+            int[,] resultado = new int[3, 1];
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        resultado[i, j] += a[i, k] * b[k, j];
+                    }
+                }
+            }
+
+            return resultado;
+        }
+
+        public static int[,] CisalhamentoHorizontal(int[,] a, int[,] b, int f)
+        {
+            int[,] resultado = new int[3, 1];
+
+            a[1, 0] = f;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        resultado[i, j] += a[i, k] * b[k, j];
+                    }
+                }
+            }
+
+            return resultado;
+        }
+
+        public static int[,] CisalhamentoVertical(int[,] a, int[,] b, int f)
+        {
+            int[,] resultado = new int[3, 1];
+
+            a[0, 1] = f;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        resultado[i, j] += a[i, k] * b[k, j];
+                    }
+                }
+            }
+
             return resultado;
         }
     }
