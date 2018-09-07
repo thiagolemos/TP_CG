@@ -59,6 +59,7 @@
             this.btnObjetos3DProjecaoObliqua = new System.Windows.Forms.ToolStripMenuItem();
             this.pbMonitor = new System.Windows.Forms.PictureBox();
             this.pnlTela = new System.Windows.Forms.Panel();
+            this.btnDesenharLinhaDda = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMonitor)).BeginInit();
             this.pnlTela.SuspendLayout();
@@ -88,7 +89,7 @@
             this.btnNovo.Image = ((System.Drawing.Image)(resources.GetObject("btnNovo.Image")));
             this.btnNovo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(77, 22);
+            this.btnNovo.Size = new System.Drawing.Size(84, 22);
             this.btnNovo.Text = "Criar Novo";
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
@@ -121,13 +122,14 @@
             this.btnDesenhar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnDesenharPonto,
             this.btnDesenharLinha,
+            this.btnDesenharLinhaDda,
             this.btnDesenharCirculo,
             this.btnDesenharElipse,
             this.btnDesenharPoligono});
             this.btnDesenhar.Image = ((System.Drawing.Image)(resources.GetObject("btnDesenhar.Image")));
             this.btnDesenhar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDesenhar.Name = "btnDesenhar";
-            this.btnDesenhar.Size = new System.Drawing.Size(75, 22);
+            this.btnDesenhar.Size = new System.Drawing.Size(78, 22);
             this.btnDesenhar.Text = "Desenhar...";
             this.btnDesenhar.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnDesenhar_DropDownItemClicked);
             // 
@@ -135,35 +137,35 @@
             // 
             this.btnDesenharPonto.CheckOnClick = true;
             this.btnDesenharPonto.Name = "btnDesenharPonto";
-            this.btnDesenharPonto.Size = new System.Drawing.Size(117, 22);
+            this.btnDesenharPonto.Size = new System.Drawing.Size(180, 22);
             this.btnDesenharPonto.Text = "Ponto";
             // 
             // btnDesenharLinha
             // 
             this.btnDesenharLinha.CheckOnClick = true;
             this.btnDesenharLinha.Name = "btnDesenharLinha";
-            this.btnDesenharLinha.Size = new System.Drawing.Size(117, 22);
-            this.btnDesenharLinha.Text = "Linha";
+            this.btnDesenharLinha.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharLinha.Text = "Reta Bresenham";
             // 
             // btnDesenharCirculo
             // 
             this.btnDesenharCirculo.CheckOnClick = true;
             this.btnDesenharCirculo.Name = "btnDesenharCirculo";
-            this.btnDesenharCirculo.Size = new System.Drawing.Size(117, 22);
+            this.btnDesenharCirculo.Size = new System.Drawing.Size(180, 22);
             this.btnDesenharCirculo.Text = "Círculo";
             // 
             // btnDesenharElipse
             // 
             this.btnDesenharElipse.CheckOnClick = true;
             this.btnDesenharElipse.Name = "btnDesenharElipse";
-            this.btnDesenharElipse.Size = new System.Drawing.Size(117, 22);
+            this.btnDesenharElipse.Size = new System.Drawing.Size(180, 22);
             this.btnDesenharElipse.Text = "Elipse";
             // 
             // btnDesenharPoligono
             // 
             this.btnDesenharPoligono.CheckOnClick = true;
             this.btnDesenharPoligono.Name = "btnDesenharPoligono";
-            this.btnDesenharPoligono.Size = new System.Drawing.Size(117, 22);
+            this.btnDesenharPoligono.Size = new System.Drawing.Size(180, 22);
             this.btnDesenharPoligono.Text = "Polígono";
             // 
             // lblPosicaoAtual
@@ -182,7 +184,7 @@
             this.btnPreencher.Image = ((System.Drawing.Image)(resources.GetObject("btnPreencher.Image")));
             this.btnPreencher.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPreencher.Name = "btnPreencher";
-            this.btnPreencher.Size = new System.Drawing.Size(100, 22);
+            this.btnPreencher.Size = new System.Drawing.Size(110, 22);
             this.btnPreencher.Text = "Preenchimento...";
             this.btnPreencher.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnPreencher_DropDownItemClicked);
             // 
@@ -190,14 +192,14 @@
             // 
             this.btnPreencherRecursivo.CheckOnClick = true;
             this.btnPreencherRecursivo.Name = "btnPreencherRecursivo";
-            this.btnPreencherRecursivo.Size = new System.Drawing.Size(122, 22);
+            this.btnPreencherRecursivo.Size = new System.Drawing.Size(125, 22);
             this.btnPreencherRecursivo.Text = "Recursivo";
             // 
             // btnPreencherVarredura
             // 
             this.btnPreencherVarredura.CheckOnClick = true;
             this.btnPreencherVarredura.Name = "btnPreencherVarredura";
-            this.btnPreencherVarredura.Size = new System.Drawing.Size(122, 22);
+            this.btnPreencherVarredura.Size = new System.Drawing.Size(125, 22);
             this.btnPreencherVarredura.Text = "Varredura";
             // 
             // btnRecortar
@@ -209,21 +211,21 @@
             this.btnRecortar.Image = ((System.Drawing.Image)(resources.GetObject("btnRecortar.Image")));
             this.btnRecortar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRecortar.Name = "btnRecortar";
-            this.btnRecortar.Size = new System.Drawing.Size(67, 22);
+            this.btnRecortar.Size = new System.Drawing.Size(69, 22);
             this.btnRecortar.Text = "Recorte...";
             // 
             // btnRecortarAplicar
             // 
             this.btnRecortarAplicar.CheckOnClick = true;
             this.btnRecortarAplicar.Name = "btnRecortarAplicar";
-            this.btnRecortarAplicar.Size = new System.Drawing.Size(142, 22);
+            this.btnRecortarAplicar.Size = new System.Drawing.Size(151, 22);
             this.btnRecortarAplicar.Text = "Aplicar recorte";
             this.btnRecortarAplicar.Click += new System.EventHandler(this.btnRecortarAplicar_Click);
             // 
             // btnRecortarDefinirJanela
             // 
             this.btnRecortarDefinirJanela.Name = "btnRecortarDefinirJanela";
-            this.btnRecortarDefinirJanela.Size = new System.Drawing.Size(142, 22);
+            this.btnRecortarDefinirJanela.Size = new System.Drawing.Size(151, 22);
             this.btnRecortarDefinirJanela.Text = "Definir janela";
             this.btnRecortarDefinirJanela.Click += new System.EventHandler(this.btnRecortarDefinirJanela_Click);
             // 
@@ -237,27 +239,27 @@
             this.btnTransformar.Image = ((System.Drawing.Image)(resources.GetObject("btnTransformar.Image")));
             this.btnTransformar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTransformar.Name = "btnTransformar";
-            this.btnTransformar.Size = new System.Drawing.Size(100, 22);
+            this.btnTransformar.Size = new System.Drawing.Size(108, 22);
             this.btnTransformar.Text = "Transformação...";
             // 
             // btnTransformarTranslacao
             // 
             this.btnTransformarTranslacao.Name = "btnTransformarTranslacao";
-            this.btnTransformarTranslacao.Size = new System.Drawing.Size(127, 22);
+            this.btnTransformarTranslacao.Size = new System.Drawing.Size(130, 22);
             this.btnTransformarTranslacao.Text = "Translação";
             this.btnTransformarTranslacao.Click += new System.EventHandler(this.btnTransformarTranslacao_Click);
             // 
             // btnTransformarRotacao
             // 
             this.btnTransformarRotacao.Name = "btnTransformarRotacao";
-            this.btnTransformarRotacao.Size = new System.Drawing.Size(127, 22);
+            this.btnTransformarRotacao.Size = new System.Drawing.Size(130, 22);
             this.btnTransformarRotacao.Text = "Rotação";
             this.btnTransformarRotacao.Click += new System.EventHandler(this.btnTransformarRotacao_Click);
             // 
             // btnTransformarEscala
             // 
             this.btnTransformarEscala.Name = "btnTransformarEscala";
-            this.btnTransformarEscala.Size = new System.Drawing.Size(127, 22);
+            this.btnTransformarEscala.Size = new System.Drawing.Size(130, 22);
             this.btnTransformarEscala.Text = "Escala";
             this.btnTransformarEscala.Click += new System.EventHandler(this.btnTransformarEscala_Click);
             // 
@@ -273,21 +275,21 @@
             this.btnObjetos3D.Image = ((System.Drawing.Image)(resources.GetObject("btnObjetos3D.Image")));
             this.btnObjetos3D.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnObjetos3D.Name = "btnObjetos3D";
-            this.btnObjetos3D.Size = new System.Drawing.Size(73, 22);
+            this.btnObjetos3D.Size = new System.Drawing.Size(78, 22);
             this.btnObjetos3D.Text = "Objetos 3D";
             this.btnObjetos3D.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnObjetos3D_DropDownItemClicked);
             // 
             // btnObjetos3DInserir
             // 
             this.btnObjetos3DInserir.Name = "btnObjetos3DInserir";
-            this.btnObjetos3DInserir.Size = new System.Drawing.Size(262, 22);
+            this.btnObjetos3DInserir.Size = new System.Drawing.Size(283, 22);
             this.btnObjetos3DInserir.Text = "Inserir objeto";
             this.btnObjetos3DInserir.Click += new System.EventHandler(this.btnObjetos3DInserir_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(259, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(280, 6);
             // 
             // btnObjetos3DProjecaoOrtografica
             // 
@@ -295,21 +297,21 @@
             this.btnObjetos3DProjecaoOrtografica.CheckOnClick = true;
             this.btnObjetos3DProjecaoOrtografica.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnObjetos3DProjecaoOrtografica.Name = "btnObjetos3DProjecaoOrtografica";
-            this.btnObjetos3DProjecaoOrtografica.Size = new System.Drawing.Size(262, 22);
+            this.btnObjetos3DProjecaoOrtografica.Size = new System.Drawing.Size(283, 22);
             this.btnObjetos3DProjecaoOrtografica.Text = "Projeção paralela ortográfica (Plano XY)";
             // 
             // btnObjetos3DProjecaoAxiometrica
             // 
             this.btnObjetos3DProjecaoAxiometrica.CheckOnClick = true;
             this.btnObjetos3DProjecaoAxiometrica.Name = "btnObjetos3DProjecaoAxiometrica";
-            this.btnObjetos3DProjecaoAxiometrica.Size = new System.Drawing.Size(262, 22);
+            this.btnObjetos3DProjecaoAxiometrica.Size = new System.Drawing.Size(283, 22);
             this.btnObjetos3DProjecaoAxiometrica.Text = "Projeção paralela axiométrica";
             // 
             // btnObjetos3DProjecaoObliqua
             // 
             this.btnObjetos3DProjecaoObliqua.CheckOnClick = true;
             this.btnObjetos3DProjecaoObliqua.Name = "btnObjetos3DProjecaoObliqua";
-            this.btnObjetos3DProjecaoObliqua.Size = new System.Drawing.Size(262, 22);
+            this.btnObjetos3DProjecaoObliqua.Size = new System.Drawing.Size(283, 22);
             this.btnObjetos3DProjecaoObliqua.Text = "Projeção paralela oblíqua (Cabinet)";
             // 
             // pbMonitor
@@ -334,6 +336,13 @@
             this.pnlTela.Name = "pnlTela";
             this.pnlTela.Size = new System.Drawing.Size(696, 448);
             this.pnlTela.TabIndex = 2;
+            // 
+            // btnDesenharLinhaDda
+            // 
+            this.btnDesenharLinhaDda.CheckOnClick = true;
+            this.btnDesenharLinhaDda.Name = "btnDesenharLinhaDda";
+            this.btnDesenharLinhaDda.Size = new System.Drawing.Size(180, 22);
+            this.btnDesenharLinhaDda.Text = "Reta DDA";
             // 
             // frmPrincipal
             // 
@@ -388,6 +397,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem btnObjetos3DProjecaoAxiometrica;
         private System.Windows.Forms.ToolStripMenuItem btnObjetos3DProjecaoObliqua;
+        private System.Windows.Forms.ToolStripMenuItem btnDesenharLinhaDda;
     }
 }
 

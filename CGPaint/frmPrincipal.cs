@@ -31,6 +31,7 @@ namespace CGPaint
         bool criandoPoligono = false;
         Ponto verticeInicial;
         Poligono tmpPoligono;
+        string tipoReta = "";
 
         public frmPrincipal()
         {
@@ -119,7 +120,7 @@ namespace CGPaint
                 processarRecorte(p);
                 desenharTela();
             }
-            if (btnDesenharLinha.Checked)
+            if (btnDesenharLinha.Checked || btnDesenharLinhaDda.Checked)
             {
                 if (!criandoLinha)
                 {
@@ -128,14 +129,29 @@ namespace CGPaint
                 }
                 else
                 {
-                    linhaFim = new Ponto(selX, selY, Color.Black);
-                    Reta reta = new Reta(linhaInicio, linhaFim, Color.Black);
-                    formas.Add(reta);
-                    processarRecorte(reta);
-                    desenharTela();
-                    linhaInicio = null;
-                    linhaFim = null;
-                    criandoLinha = false;
+                    if (btnDesenharLinha.Checked)
+                    {
+                        linhaFim = new Ponto(selX, selY, Color.Black);
+                        Reta reta = new Reta(linhaInicio, linhaFim, Color.Black, "BRESENHAM");
+                        formas.Add(reta);
+                        processarRecorte(reta);
+                        desenharTela();
+                        linhaInicio = null;
+                        linhaFim = null;
+                        criandoLinha = false;
+                    }
+                    else
+                    {
+                        linhaFim = new Ponto(selX, selY, Color.Black);
+                        Reta reta = new Reta(linhaInicio, linhaFim, Color.Black, "DDA");
+                        formas.Add(reta);
+                        processarRecorte(reta);
+                        desenharTela();
+                        linhaInicio = null;
+                        linhaFim = null;
+                        criandoLinha = false;
+
+                    }
                 }
             }
             if (btnDesenharCirculo.Checked)
@@ -182,7 +198,7 @@ namespace CGPaint
                 else
                 {
                     linhaFim = pontoSel;
-                    Reta tmpReta = new Reta(linhaInicio, linhaFim, Color.Black);
+                    Reta tmpReta = new Reta(linhaInicio, linhaFim, Color.Black, "");
                     foreach (Ponto p in tmpReta.getPontos())
                         frameBuffer.setPonto(p);
                     desenharTela();
@@ -239,7 +255,7 @@ namespace CGPaint
                         }
                     }
                     xIntersecoes.Sort();
-                    for (int i = 0; i < xIntersecoes.Count - 1; i+=2)
+                    for (int i = 0; i < xIntersecoes.Count - 1; i += 2)
                     {
                         for (int x = xIntersecoes[i]; x <= xIntersecoes[i + 1]; x++)
                         {
@@ -416,7 +432,7 @@ namespace CGPaint
                 }
                 if (aceito)
                 {
-                    Reta tmpReta = new Reta(new Ponto(x0, y0, r.getCor()), new Ponto(x1, y1, r.getCor()), r.getCor());
+                    Reta tmpReta = new Reta(new Ponto(x0, y0, r.getCor()), new Ponto(x1, y1, r.getCor()), r.getCor(), "");
                     foreach (Ponto p in tmpReta.getPontos())
                         frameBuffer.setPonto(p);
                 }
@@ -532,7 +548,7 @@ namespace CGPaint
                         int anguloGraus = 30;
                         double angulo = (Math.PI / 180) * anguloGraus;
                         //Rotação em X
-                        int[,] matrizProj =  Matriz.Multiplicacao(
+                        int[,] matrizProj = Matriz.Multiplicacao(
                                 new double[,] { {1, 0, 0, 0 },
                                                 {0, Math.Cos(angulo), -Math.Sin(angulo), 0 },
                                                 {0, Math.Sin(angulo), Math.Cos(angulo), 0 },
@@ -555,7 +571,7 @@ namespace CGPaint
                     {
                         int anguloGraus = 30;
                         double angulo = (Math.PI / 180) * anguloGraus;
-                        double fator = 1.0/2.0;
+                        double fator = 1.0 / 2.0;
                         int[,] matrizProj = Matriz.Multiplicacao(
                             new double[,] { {1, 0, fator*Math.Cos(angulo), 0},
                                             {0, 1, fator*Math.Sin(angulo), 0},
@@ -1074,11 +1090,11 @@ namespace CGPaint
                 novoPoligono.setOrigem(frmInserirObjeto3D.OrigemX, frmInserirObjeto3D.OrigemY);
                 List<Ponto3D> vertices = new List<Ponto3D>();
                 int i;
-                for (i = 0; i < frmInserirObjeto3D.Pontos.Count; i+=3)
+                for (i = 0; i < frmInserirObjeto3D.Pontos.Count; i += 3)
                 {
                     vertices.Add(new Ponto3D(frmInserirObjeto3D.Pontos[i],
-                                             frmInserirObjeto3D.Pontos[i+1],
-                                             frmInserirObjeto3D.Pontos[i+2]));
+                                             frmInserirObjeto3D.Pontos[i + 1],
+                                             frmInserirObjeto3D.Pontos[i + 2]));
                 }
                 novoPoligono.setVertices(vertices);
                 i = 0;
@@ -1111,5 +1127,6 @@ namespace CGPaint
                 clickedItem.Checked = isItemMarcado ? true : false;
             }
         }
+
     }
 }

@@ -53,8 +53,8 @@ namespace CGPaint
 
         public void setCoordenadaHomogenea(int[,] coord)
         {
-            setCoordenada(coord[0,0],
-                          coord[1,0]);
+            setCoordenada(coord[0, 0],
+                          coord[1, 0]);
         }
 
         public override string ToString()
@@ -69,14 +69,20 @@ namespace CGPaint
         private Ponto fim;
         private Color cor;
         private HashSet<Ponto> pontos;
+        private string tipo;
 
-        public Reta(Ponto inicio, Ponto fim, Color cor)
+        public Reta(Ponto inicio, Ponto fim, Color cor, string tipo)
         {
             this.inicio = inicio;
             this.fim = fim;
             this.cor = cor;
+            this.tipo = tipo;
             pontos = new HashSet<Ponto>();
-            RetaBresenham();
+
+            if (tipo == "DDA")
+                RetaDda();
+            else
+                RetaBresenham();
         }
 
         public Ponto getPontoInicial()
@@ -115,7 +121,12 @@ namespace CGPaint
         public HashSet<Ponto> getPontos()
         {
             pontos = new HashSet<Ponto>();
-            RetaBresenham();
+
+            if (tipo == "DDA")
+                RetaDda();
+            else
+                RetaBresenham();
+
             return pontos;
         }
 
@@ -204,6 +215,41 @@ namespace CGPaint
                 }
                 pontos.Add(new Ponto(xTemp + desvioX, yTemp + desvioY, cor));
             }
+        }
+
+        void RetaDda()
+        {
+            //Pontos Iniciais
+            float x0 = inicio.getX();
+            float y0 = inicio.getY();
+            int x1 = fim.getX();
+            int y1 = fim.getY();
+            int pasos = 0;
+
+            float x, y;
+            double deltax, deltay, e, m;
+
+            deltax = x1 - x0;
+            deltay = y1 - y0;
+
+            if (Math.Abs(deltax) > Math.Abs(deltay))
+                pasos = (int)Math.Abs(deltax);
+            else
+                pasos = (int)Math.Abs(deltax);
+
+            x = (float)deltax / pasos;
+            y = (float)deltay / pasos;
+
+            pontos.Add(new Ponto((int)x0, (int)y0, cor));
+
+            for (int k = 1; k < pasos + 1; k++)
+            {
+                x0 = x0 + x;
+                y0 = y0 + y;
+                pontos.Add(new Ponto((int)x0, (int)y0, cor));
+            }
+
+
         }
 
         public override string ToString()
@@ -426,7 +472,7 @@ namespace CGPaint
             pontos.Clear();
             for (int i = 0; i < vertices.Count; i++)
             {
-                tmpReta = new Reta(vertices[i], vertices[(i + 1) % vertices.Count], vertices[i].getCor());
+                tmpReta = new Reta(vertices[i], vertices[(i + 1) % vertices.Count], vertices[i].getCor(), "");
                 foreach (Ponto p in tmpReta.getPontos())
                     pontos.Add(p);
             }
@@ -453,7 +499,7 @@ namespace CGPaint
             List<Reta> retas = new List<Reta>();
             for (int i = 0; i < vertices.Count; i++)
             {
-                retas.Add(new Reta(vertices[i], vertices[(i + 1) % vertices.Count], vertices[i].getCor()));
+                retas.Add(new Reta(vertices[i], vertices[(i + 1) % vertices.Count], vertices[i].getCor(), ""));
             }
             return retas;
         }
